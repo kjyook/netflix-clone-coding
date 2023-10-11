@@ -1,3 +1,5 @@
+import { Input } from "@/stories/Input";
+
 const Auth = () => {
     return (
         <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
@@ -10,6 +12,7 @@ const Auth = () => {
                         <h2 className="text-white text-4xl mb-8 font-semibold">
                             Sign in
                         </h2>
+                        <Input description="email" />
                     </div>
                 </div>
             </div>
