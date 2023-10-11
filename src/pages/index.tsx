@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <>
-    <p>netflix-clone</p>
+      <p className="text-2xl text-green-500">netflix-clone</p>
     </>
   )
 }
