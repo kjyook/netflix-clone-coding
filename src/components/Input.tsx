@@ -4,10 +4,11 @@ interface InputProps {
     id: string
     description: string;
     secret: string;
+    value: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export const Input : React.FC<InputProps> = ({ id, description, secret, onChange }) => {
+export const Input : React.FC<InputProps> = ({ id, description, secret, value, onChange }) => {
     return (
         <>
         <div className='relative'>
@@ -18,7 +19,7 @@ export const Input : React.FC<InputProps> = ({ id, description, secret, onChange
             rounded-md
             px-6
             pt-6
-            pd-1
+            pb-1.5
             w-full 
             text-md
             text-white
@@ -29,6 +30,7 @@ export const Input : React.FC<InputProps> = ({ id, description, secret, onChange
             peer
             '
             type={secret}
+            value={value}
             onChange={onChange}
             placeholder=""
             /> 
@@ -40,7 +42,7 @@ export const Input : React.FC<InputProps> = ({ id, description, secret, onChange
             transform
             -translate-y-3
             scale-75
-            top-4
+            top-3.5
             z-10
             origin-[0]
             left-6
