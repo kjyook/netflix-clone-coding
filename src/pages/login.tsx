@@ -27,7 +27,13 @@ const Login = () => {
                                 <Input id="username" description="이름" secret="text" value={username} onChange={(ev) => setUsername(ev.target.value)} />
                             )}
                             <Input id="email" description="이메일 주소 또는 전화번호" secret="email" value={email} onChange={(ev) => setEmail(ev.target.value)} />
+                            {/* {email === "" && (
+                                <p className="text-orange-500 text-sm">정확한 이메일 주소나 전화번호를 입력하세요.</p>
+                            )} */}
                             <Input id="password" description="비밀번호" secret="password" value={password} onChange={(ev) => setPassword(ev.target.value)}/>
+                            {/* {password === "" && (
+                                <p className="text-orange-500 text-sm">비밀번호는 4~60자 사이여야 합니다.</p>
+                            )} */}
                         </div>
                         <button className="bg-red-600 py-3 text-white rounded-md w-full mt-10">
                             로그인
