@@ -1,15 +1,28 @@
 import { Input } from "@/components/Input";
 import { useState, useCallback } from "react";
+import axios from "axios";
 
 const Login = () => {
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [username, setUsername] = useState<string>('');
+    const [name, setName] = useState<string>('');
 
     const [variant, setVariant] = useState('login');
     const toggleVariant = useCallback(() => {
         setVariant((prev) => prev === 'login' ? 'signup' : 'login');
-    }, [])
+    }, []);
+
+    const register = useCallback(async () => {
+        try {
+            await axios.post('/api/register', {
+                email,
+                name,
+                password
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }, [email, name, password]);
 
     return (
         <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
@@ -24,7 +37,7 @@ const Login = () => {
                         </h2>
                         <div className="flex flex-col gap-4">
                             {variant === 'signup' && (
-                                <Input id="username" description="이름" secret="text" value={username} onChange={(ev) => setUsername(ev.target.value)} />
+                                <Input id="username" description="이름" secret="text" value={name} onChange={(ev) => setName(ev.target.value)} />
                             )}
                             <Input id="email" description="이메일 주소 또는 전화번호" secret="email" value={email} onChange={(ev) => setEmail(ev.target.value)} />
                             {/* {email === "" && (
@@ -35,8 +48,8 @@ const Login = () => {
                                 <p className="text-orange-500 text-sm">비밀번호는 4~60자 사이여야 합니다.</p>
                             )} */}
                         </div>
-                        <button className="bg-red-600 py-3 text-white rounded-md w-full mt-10">
-                            로그인
+                        <button onClick={register} className="bg-red-600 py-3 text-white rounded-md w-full mt-10">
+                            {variant === 'login' ? '로그인' : '회원가입'}
                         </button>
                         <p className="text-neutral-500 mt-12">
                             {variant === 'login' ? 'Netflix 회원이 아니신가요?' : '이미 회원이신가요?'}
