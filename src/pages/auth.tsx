@@ -1,8 +1,14 @@
 import { Input } from "@/components/Input";
 import { useState, useCallback } from "react";
 import axios from "axios";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
-const Login = () => {
+const Auth = () => {
+    const router = useRouter();
+
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [name, setName] = useState<string>('');
@@ -12,17 +18,40 @@ const Login = () => {
         setVariant((prev) => prev === 'login' ? 'signup' : 'login');
     }, []);
 
+    const login = useCallback(async () => {
+        try {
+            console.log("login start");
+            await signIn('credentials', {
+                email,
+                password,
+                redirect: false,
+                callbackUrl: '/'
+            });
+
+            router.push('/');
+            console.log("after push to main");
+        } catch (error) {
+            console.log(error);
+            console.log("login에서 오류나왔데요");
+        }
+    }, [email, password, router]);
+
     const register = useCallback(async () => {
         try {
+            console.log("entry register");
             await axios.post('/api/register', {
                 email,
                 name,
                 password
             })
+            
+            console.log("post를 하고 난 후의 register");
+            login();
         } catch (error) {
             console.log(error);
+            console.log("error in register");
         }
-    }, [email, name, password]);
+    }, [email, name, password, login]);
 
     return (
         <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
@@ -48,9 +77,10 @@ const Login = () => {
                                 <p className="text-orange-500 text-sm">비밀번호는 4~60자 사이여야 합니다.</p>
                             )} */}
                         </div>
-                        <button onClick={register} className="bg-red-600 py-3 text-white rounded-md w-full mt-10">
+                        <button onClick={variant === 'login' ? login : register} className="bg-red-600 py-3 text-white rounded-md w-full mt-10">
                             {variant === 'login' ? '로그인' : '회원가입'}
                         </button>
+                        
                         <p className="text-neutral-500 mt-12">
                             {variant === 'login' ? 'Netflix 회원이 아니신가요?' : '이미 회원이신가요?'}
                             <span onClick={toggleVariant} className="text-white ml-1 hover:underline cursor-pointer">
@@ -64,4 +94,4 @@ const Login = () => {
     )
 }
 
-export default Login;
+export default Auth;
