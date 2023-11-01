@@ -43,8 +43,8 @@ export default NextAuth({
             clientSecret: process.env.GITHUB_SECRET || '',
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLEINT_ID || '',
-            clientSecret: process.env.GOOGLE_CLEINT_SECRET || '',
+            clientId: process.env.GOOGLE_ID || '',
+            clientSecret: process.env.GOOGLE_SECRET || '',
         })
     ],
     pages: {
