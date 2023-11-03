@@ -2,13 +2,10 @@ import { Input } from "@/components/Input";
 import { useState, useCallback } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/router";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 const Auth = () => {
-    const router = useRouter();
-
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [name, setName] = useState<string>('');
@@ -20,36 +17,27 @@ const Auth = () => {
 
     const login = useCallback(async () => {
         try {
-            console.log("login start");
             await signIn('credentials', {
                 email,
                 password,
-                redirect: false,
-                callbackUrl: '/'
+                callbackUrl: '/profile'
             });
-
-            router.push('/');
-            console.log("after push to main");
         } catch (error) {
             console.log(error);
-            console.log("login에서 오류나왔데요");
         }
-    }, [email, password, router]);
+    }, [email, password]);
 
     const register = useCallback(async () => {
         try {
-            console.log("entry register");
             await axios.post('/api/register', {
                 email,
                 name,
                 password
             })
             
-            console.log("post를 하고 난 후의 register");
             login();
         } catch (error) {
             console.log(error);
-            console.log("error in register");
         }
     }, [email, name, password, login]);
 
@@ -81,10 +69,10 @@ const Auth = () => {
                             {variant === 'login' ? '로그인' : '회원가입'}
                         </button>
                         <div className="flex flex-row items-center justify-center gap-4 mt-8">
-                            <div onClick={() => signIn('google', { callbackUrl: '/' })} className="w-10 h-10 rounded-full bg-white flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                            <div onClick={() => signIn('google', { callbackUrl: '/profile' })} className="w-10 h-10 rounded-full bg-white flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                                 <FcGoogle size={30} />
                             </div>
-                            <div onClick={() => signIn('github', { callbackUrl: '/' })} className="w-10 h-10 rounded-full bg-white flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                            <div onClick={() => signIn('github', { callbackUrl: '/profile' })} className="w-10 h-10 rounded-full bg-white flex items-center justify-center cursor-pointer hover:opacity-80 transition">
                                 <FaGithub size={30} />
                             </div>
                         </div>
