@@ -7,6 +7,7 @@ export default function Home() {
 
   return (
     <>
+      <Navbar />
       <h1 className="text-green-500">netflix clone</h1>
       <p className="text-white">Logged in as : {user?.name}</p>
       <button className="h-10 w-full bg-white" onClick={() => signOut()}>log out</button>
