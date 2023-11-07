@@ -11,7 +11,6 @@ const AccountMenu = ({ visible }: AccountMenuProps) => {
     
 
     if (!visible){
-        console.log("not visible");
         return null;
     }
 
