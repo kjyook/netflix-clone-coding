@@ -1,5 +1,5 @@
 import useBillboard from "@/hooks/useBillboard";
-import React, { useEffect } from "react";
+import React from "react";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 
 const Billboard = () => {
