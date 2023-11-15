@@ -1,5 +1,6 @@
 import React from "react";
 import { BsFillPlayFill } from "react-icons/bs";
+import { useRouter } from "next/router";
 import FavoriteButton from "./FavoriteButton";
 
 interface MovieCardProps {
@@ -7,6 +8,8 @@ interface MovieCardProps {
 };
 
 const MovieCard = ({ data } : MovieCardProps) => {
+    const router = useRouter();
+
     return (
         <div className="group bg-zinc-900 col-span relative h-[12vw]">
             <img className="
@@ -73,7 +76,7 @@ const MovieCard = ({ data } : MovieCardProps) => {
                         transition
                         hover:bg-neutral-300
                         "
-                        onClick={() => {}}>
+                        onClick={() => router.push(`/watch/${data?.id}`)}>
                             <BsFillPlayFill size={30} />
                         </div>
                         <FavoriteButton movieId={data?.id} />
