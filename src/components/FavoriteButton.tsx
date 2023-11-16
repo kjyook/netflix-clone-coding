@@ -13,7 +13,7 @@ const FavoriteButton = ({ movieId }: FavoriteButtonProps) => {
     const { data: currentUser, mutate } = useCurrentUser();
 
     const isFavorite = useMemo(() => {
-        const list = currentUser?.favorites || [];
+        const list = currentUser?.favoritesIds || [];
 
         return list.includes(movieId);
     }, [currentUser, movieId]);
@@ -27,9 +27,9 @@ const FavoriteButton = ({ movieId }: FavoriteButtonProps) => {
             response = await axios.post('/api/favorite', { movieId });
         }
 
-        const updatedFavoriteIds = response?.data?.favorites;
+        const updatedFavoriteIds = response?.data?.favoriteIds;
 
-        mutate({ ...currentUser, favorites: updatedFavoriteIds });
+        mutate({ ...currentUser, favoriteIds: updatedFavoriteIds });
 
         mutateFavorites();
     }, [movieId, isFavorite, currentUser, mutate, mutateFavorites]);

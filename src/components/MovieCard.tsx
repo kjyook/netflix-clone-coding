@@ -20,6 +20,7 @@ const MovieCard = ({ data } : MovieCardProps) => {
                 shadow-xl
                 rounded-md
                 group-hover:opacity-90
+                sm:group-hover:opacity-0
                 delay-300
                 w-full
                 h-[12vw]
@@ -32,6 +33,7 @@ const MovieCard = ({ data } : MovieCardProps) => {
                 duration-200
                 z-10
                 invisible
+                sm:visible
                 delay-300
                 w-full
                 scale-0
@@ -44,6 +46,7 @@ const MovieCard = ({ data } : MovieCardProps) => {
                     cursor-pointer
                     object-cover
                     transition
+                    duration
                     shadow-xl
                     rounded-t-md
                     w-full
@@ -51,9 +54,8 @@ const MovieCard = ({ data } : MovieCardProps) => {
                 " src={data.thumbnalUrl} alt="Thumbnail" />
                 <div className="
                     z-10
-                    bg-zinc-900
-                    p-2
-                    lg:p-4
+                    bg-zinc-800
+                    p-2 lg:p-4
                     absolute
                     w-full
                     transition
@@ -64,10 +66,8 @@ const MovieCard = ({ data } : MovieCardProps) => {
                         <div 
                         className="
                         cursor-pointer
-                        w-6
-                        h-6
-                        lg:w-10
-                        lg:h-10
+                        w-6 lg:w-10
+                        h-6 lg:h-10
                         bg-white
                         rounded-full
                         flex

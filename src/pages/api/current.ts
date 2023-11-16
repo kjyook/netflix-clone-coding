@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import serverAuth from '@/lib/serverAuth';
+import serverAuth from '@/libs/serverAuth';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method !== 'GET') {

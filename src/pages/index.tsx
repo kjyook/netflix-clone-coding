@@ -3,13 +3,13 @@ import InfoModal from "@/components/InfoModal";
 import MovieList from "@/components/MovieList";
 import Navbar from "@/components/Navbar";
 import useFavorites from "@/hooks/useFavorites";
-import useInfoModal from "@/hooks/useInfoModal";
+import useInfoModalStore from "@/hooks/useInfoModalStore";
 import useMovieList from "@/hooks/useMovieList";
 
 export default function Home() {
   const { data: movies = [] } = useMovieList();
   const { data: favorites = [] } = useFavorites();
-  const { isOpen, closeModal } = useInfoModal();
+  const { isOpen, closeModal } = useInfoModalStore();
 
   return (
     <>
