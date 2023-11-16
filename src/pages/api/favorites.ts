@@ -8,7 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     try {
-        const { currentUser } = await serverAuth(req);
+        const { currentUser } = await serverAuth(req, res);
         const favoriteMovies = await prismadb.movie.findMany({
             where: {
                 id: {

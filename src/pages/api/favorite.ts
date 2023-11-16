@@ -6,7 +6,7 @@ import serverAuth from "@/libs/serverAuth";
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === 'POST') {
-            const { currentUser } = await serverAuth(req);
+            const { currentUser } = await serverAuth(req, res);
             const { movieId } = req.body;
             const existingMovie = await prismadb.movie.findUnique({
                 where: {
@@ -29,11 +29,12 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             });
 
-            return res.status(200).json(user);
+            res.status(200).json(user);
         }
 
         if (req.method === 'DELETE') {
-            const { currentUser } = await serverAuth(req);
+            console.log('누가 favorite delete 보냄??');
+            const { currentUser } = await serverAuth(req, res);
             const { movieId } = req.body;
             const existingMovie = await prismadb.movie.findUnique({
                 where: {
@@ -55,13 +56,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                 }
             });
 
-            return res.status(200).json(updateUser);
+            res.status(200).json(updateUser);
         }
 
-        return res.status(405).end();
+        res.status(405).end();
     } catch (error) {
         console.log(error);
-        return res.status(400).end();
+        res.status(400).end();
     }
 };
 

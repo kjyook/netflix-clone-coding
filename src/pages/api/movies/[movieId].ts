@@ -8,7 +8,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     try {
-        await serverAuth(req);
+        await serverAuth(req, res);
 
         const { movieId } = req.query;
 
