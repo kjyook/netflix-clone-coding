@@ -3,7 +3,7 @@ import { without } from "lodash";
 import prismadb from '@/lib/prismadb';
 import serverAuth from "@/lib/serverAuth";
 
-export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
         if (req.method === 'POST') {
             const { currentUser } = await serverAuth(req);
@@ -64,3 +64,5 @@ export const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         return res.status(400).end();
     }
 };
+
+export default handler;

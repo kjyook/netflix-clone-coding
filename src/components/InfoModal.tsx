@@ -87,7 +87,7 @@ const InfoModal = ({ visible, onClose }: InfoModalProps) => {
                         items-center
                         justify-center
                         "
-                        onClick={() => {}}
+                        onClick={handleClose}
                         >
                             <AiOutlineClose className="text-white" size={20} />
                         </div>
