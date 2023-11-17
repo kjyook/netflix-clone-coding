@@ -28,12 +28,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     }
                 }
             });
+            console.log('favorite user', user);
+            console.log('favorite currentUser', currentUser);
 
             res.status(200).json(user);
         }
 
         if (req.method === 'DELETE') {
-            console.log('누가 favorite delete 보냄??');
             const { currentUser } = await serverAuth(req, res);
             const { movieId } = req.body;
             const existingMovie = await prismadb.movie.findUnique({
