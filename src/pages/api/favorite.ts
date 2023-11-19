@@ -28,8 +28,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
                     }
                 }
             });
-            console.log('favorite user', user);
-            console.log('favorite currentUser', currentUser);
 
             res.status(200).json(user);
         }
