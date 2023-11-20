@@ -1,7 +1,7 @@
 import useCurrentUser from "@/hooks/userCurrentUser";
 import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
-import Image from "next/image";
+import { RouteController } from "@/models/RouteController";
 
 interface MemberProps {
   link: string;
@@ -39,6 +39,8 @@ const Member = ({ link }: MemberProps) => {
 
 const Profiles = () => {
     const { data: user } = useCurrentUser();
+
+    RouteController();
 
     return (
     <>

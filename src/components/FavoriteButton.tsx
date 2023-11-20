@@ -10,13 +10,13 @@ interface FavoriteButtonProps {
 
 const FavoriteButton = ({ movieId }: FavoriteButtonProps) => {
     const { mutate: mutateFavorites } = useFavorites();
-    const { data: currentUser, mutate } = useCurrentUser();
+    const { data: user, mutate } = useCurrentUser();
 
     const isFavorite = useMemo(() => {
-        const list = currentUser?.favorites || [];
+        const list = user?.favoriteIds || [];
 
         return list.includes(movieId);
-    }, [currentUser, movieId]);
+    }, [user, movieId]);
 
     const toggleFavorite = useCallback(async () => {
         let response;
@@ -27,12 +27,12 @@ const FavoriteButton = ({ movieId }: FavoriteButtonProps) => {
             response = await axios.post('/api/favorite', { movieId });
         }
 
-        const updatedFavoriteIds = response?.data?.favorites;
+        const updatedFavoriteIds = response?.data?.favoriteIds;
 
-        mutate({ ...currentUser, favorites: updatedFavoriteIds });
+        mutate({ ...user, favoriteIds: updatedFavoriteIds });
 
         mutateFavorites();
-    }, [movieId, isFavorite, currentUser, mutate, mutateFavorites]);
+    }, [movieId, isFavorite, user, mutate, mutateFavorites]);
 
     const Icon = isFavorite ? AiOutlineCheck : AiOutlinePlus;
 

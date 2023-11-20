@@ -1,11 +1,15 @@
 import { Input } from "@/components/Input";
-import { useState, useCallback } from "react";
+import { useState, useCallback, use } from "react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { useRouter } from "next/router";
+import { RouteController } from "@/models/RouteController";
 
 const Auth = () => {
+    const router = useRouter();
+
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [name, setName] = useState<string>('');
@@ -41,10 +45,12 @@ const Auth = () => {
         }
     }, [email, name, password, login]);
 
+    RouteController();
+
     return (
         <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
             <div className="bg-black w-full h-full bg-opacity-50">
-                <nav className="px-12 py-5">
+                <nav onClick={() => router.push('/')} className="px-12 py-5">
                     <img src="/images/logo.png" alt="logo" className="h-12" />
                 </nav>
                 <div className="flex justify-center">
