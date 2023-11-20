@@ -16,4 +16,6 @@ const getServerSideProps = async (context: NextPageContext) => {
     return {
       props: {}
     }
-  };
+};
+
+export default getServerSideProps;
