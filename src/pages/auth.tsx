@@ -5,7 +5,7 @@ import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useRouter } from "next/router";
-import { ControlRoute } from "@/models/ControlRoute";
+import { RouteController } from "@/models/RouteController";
 
 const Auth = () => {
     const router = useRouter();
@@ -45,7 +45,7 @@ const Auth = () => {
         }
     }, [email, name, password, login]);
 
-    ControlRoute();
+    RouteController();
 
     return (
         <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
