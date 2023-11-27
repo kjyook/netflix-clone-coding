@@ -7,9 +7,10 @@ interface InputProps {
     secret: string;
     value: string;
     onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onKeyPress?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 };
 
-export const Input : React.FC<InputProps> = ({ id, description, secret, value, onChange }) => {
+export const Input : React.FC<InputProps> = ({ id, description, secret, value, onChange, onKeyPress }) => {
     return (
         <>
         <div className='relative'>
@@ -33,6 +34,7 @@ export const Input : React.FC<InputProps> = ({ id, description, secret, value, o
             type={secret}
             value={value}
             onChange={onChange}
+            onKeyPress={onKeyPress}
             placeholder=""
             /> 
             <label

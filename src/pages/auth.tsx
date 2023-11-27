@@ -45,6 +45,12 @@ const Auth = () => {
         }
     }, [email, name, password, login]);
 
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            variant === 'login' ? login() : register();
+        }
+    };
+
     RouteController();
 
     return (
@@ -60,13 +66,13 @@ const Auth = () => {
                         </h2>
                         <div className="flex flex-col gap-4">
                             {variant === 'signup' && (
-                                <Input id="username" description="이름" secret="text" value={name} onChange={(ev) => setName(ev.target.value)} />
+                                <Input id="username" description="이름" secret="text" value={name} onChange={(ev) => setName(ev.target.value)} onKeyPress={handleKeyPress} />
                             )}
-                            <Input id="email" description="이메일 주소 또는 전화번호" secret="email" value={email} onChange={(ev) => setEmail(ev.target.value)} />
+                            <Input id="email" description="이메일 주소 또는 전화번호" secret="email" value={email} onChange={(ev) => setEmail(ev.target.value)} onKeyPress={handleKeyPress} />
                             {/* {email === "" && (
                                 <p className="text-orange-500 text-sm">정확한 이메일 주소나 전화번호를 입력하세요.</p>
                             )} */}
-                            <Input id="password" description="비밀번호" secret="password" value={password} onChange={(ev) => setPassword(ev.target.value)}/>
+                            <Input id="password" description="비밀번호" secret="password" value={password} onChange={(ev) => setPassword(ev.target.value)} onKeyPress={handleKeyPress}/>
                             {/* {password === "" && (
                                 <p className="text-orange-500 text-sm">비밀번호는 4~60자 사이여야 합니다.</p>
                             )} */}
